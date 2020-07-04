@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'providers/cart.dart';
 import 'screens/home_screen.dart';
+import 'screens/main_screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -32,8 +33,10 @@ class App extends StatelessWidget {
           accentColor: Colors.yellow,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MenuScreen(),
+        home: MainScreen(),
         routes: {
+          MainScreen.routeName: (context) => MainScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
           MenuScreen.routeName: (context) => MenuScreen(),
           CartScreen.routeName: (context) => CartScreen(),
           ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),

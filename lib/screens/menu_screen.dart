@@ -3,6 +3,7 @@ import 'package:mcdelivery_clone/models/category.dart';
 import 'package:mcdelivery_clone/providers/categories.dart';
 import 'package:mcdelivery_clone/screens/cart_screen.dart';
 import 'package:mcdelivery_clone/screens/category_tab.dart';
+import 'package:mcdelivery_clone/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -43,19 +44,8 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Menu'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_basket),
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
-            },
-          ),
-        ],
-      ),
-      body: Column(
+    return Container(
+      child: Column(
         children: <Widget>[
           Container(
             width: double.infinity,
