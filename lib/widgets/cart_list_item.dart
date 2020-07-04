@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:mcdelivery_clone/models/cart_item.dart';
 import 'package:mcdelivery_clone/providers/cart.dart';
@@ -31,66 +32,89 @@ class CartListItem extends StatelessWidget {
       locale: locale.toString(),
     );
 
-    return ListTile(
-      leading: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          if (imageUrl != null)
-            Expanded(
-              child: Image.network(imageUrl),
-            ),
-          GestureDetector(
-            onTap: () {},
-            child: Text('EDIT'),
-          )
-        ],
-      ),
-      title: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Text(
-          title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      child: _buildListItem(context, cart, currencyFormat),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Edit',
+          color: Theme.of(context).accentColor,
+          icon: Icons.edit,
+          onTap: () {},
         ),
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            currencyFormat.format(price),
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-      trailing: Container(
+        IconSlideAction(
+          caption: 'Delete',
+          color: Theme.of(context).errorColor,
+          icon: Icons.delete,
+          onTap: () {
+            cart.removeItem(productId);
+          },
+        ),
+      ],
+    );
+  }
+
+  InkWell _buildListItem(
+      BuildContext context, Cart cart, NumberFormat currencyFormat) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.remove_circle_outline,
-                    color: Theme.of(context).primaryColor,
+            ListTile(
+              leading: (imageUrl != null) ? Image.network(imageUrl) : null,
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                  onPressed: () {
-                    cart.removeSingleItem(productId);
-                  },
                 ),
-                Text('$quantity'),
-                IconButton(
-                  icon: Icon(
-                    Icons.add_circle_outline,
-                    color: Theme.of(context).primaryColor,
+              ),
+              trailing: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.remove_circle_outline,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          cart.removeSingleItem(productId);
+                        },
+                      ),
+                      Text('$quantity'),
+                      IconButton(
+                        icon: Icon(
+                          Icons.add_circle_outline,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          cart.addItem(productId, price, title, imageUrl);
+                        },
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    cart.addItem(productId, price, title, imageUrl);
-                  },
-                )
-              ],
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 24),
+              child: Text(
+                currencyFormat.format(price * quantity),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),
