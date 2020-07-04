@@ -42,6 +42,8 @@ var dummyProducts = [
     description:
         '2 pieces of our crispy and juicy Chicken McDo with rice and gravy. Choose from Original or Spicy chicken',
     price: 150,
+    imageUrl:
+        'https://mcdelivery.com.ph/uploads/images/2pcChickenMcDomeal435X320-V1.png',
   ),
   Product(
     id: Uuid().v1(),
@@ -49,6 +51,8 @@ var dummyProducts = [
     categoryId: 'c1',
     description: 'Our crispy chicken fillet served with rice and gravy',
     price: 59,
+    imageUrl:
+        'https://mcdelivery.com.ph/uploads/images/ChickenFilletNew+Rice-435x320-V1.png',
   ),
   Product(
     id: Uuid().v1(),
@@ -57,6 +61,8 @@ var dummyProducts = [
     description:
         'Crispy and juicy Chicken McDo served with rice and gravy. Choose from Original or Spicy chicken',
     price: 75,
+    imageUrl:
+        'https://mcdelivery.com.ph/uploads/images/1-pc.-Chicken-McDo-with-Rice-&-Fries-ala435X320-V1.png',
   ),
   Product(
     id: Uuid().v1(),

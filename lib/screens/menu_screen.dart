@@ -48,7 +48,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
         title: Text('Menu'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_basket),
             onPressed: () {
               Navigator.of(context).pushNamed(CartScreen.routeName);
             },

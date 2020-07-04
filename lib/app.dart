@@ -4,6 +4,7 @@ import 'package:mcdelivery_clone/providers/product.dart';
 import 'package:mcdelivery_clone/providers/products.dart';
 import 'package:mcdelivery_clone/screens/cart_screen.dart';
 import 'package:mcdelivery_clone/screens/menu_screen.dart';
+import 'package:mcdelivery_clone/screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/cart.dart';
@@ -35,6 +36,7 @@ class App extends StatelessWidget {
         routes: {
           MenuScreen.routeName: (context) => MenuScreen(),
           CartScreen.routeName: (context) => CartScreen(),
+          ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
         },
       ),
     );

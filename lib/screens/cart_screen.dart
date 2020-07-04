@@ -44,7 +44,7 @@ class CartScreen extends StatelessWidget {
               children: <Widget>[
                 Text('Subtotal'),
                 Text(
-                  currencyFormat.format(cart.totalAmount),
+                  currencyFormat.format(cart.subTotal),
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -76,7 +76,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  currencyFormat.format(cart.deliveryCharge),
+                  currencyFormat.format(cart.totalAmount),
                   style: TextStyle(
                     color: Colors.black,
                   ),

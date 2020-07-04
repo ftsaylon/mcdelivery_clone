@@ -10,17 +10,24 @@ class Product with ChangeNotifier {
   bool isFavorite;
 
   Product({
-    @required this.id,
-    @required this.title,
-    @required this.categoryId,
-    @required this.description,
-    @required this.price,
+    this.id,
+    this.title,
+    this.categoryId,
+    this.description,
+    this.price,
     this.imageUrl,
-    this.isFavorite,
+    this.isFavorite = false,
   });
 
   // void _setFavoriteValue(bool newValue) {
   //   isFavorite = newValue;
   //   notifyListeners();
   // }
+
+  void toggleFavoriteStatus() {
+    // final oldStatus = isFavorite;
+    isFavorite = !isFavorite;
+    print(isFavorite);
+    notifyListeners();
+  }
 }

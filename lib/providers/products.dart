@@ -52,4 +52,9 @@ class Products with ChangeNotifier {
     _items.removeAt(productIndex);
     notifyListeners();
   }
+
+  void toggleFavoriteStatus(String id) {
+    findById(id).toggleFavoriteStatus();
+    notifyListeners();
+  }
 }

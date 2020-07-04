@@ -21,7 +21,7 @@ class Orders with ChangeNotifier {
       Order(
         id: Uuid().v1(),
         amount: total,
-        dateTime: timestamp,
+        dateCreated: timestamp,
         products: cartProducts,
       ),
     );

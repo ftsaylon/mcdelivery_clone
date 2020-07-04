@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mcdelivery_clone/providers/cart.dart';
 import 'package:mcdelivery_clone/providers/product.dart';
+import 'package:mcdelivery_clone/screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductGridItem extends StatelessWidget {
@@ -9,8 +10,8 @@ class ProductGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
-    final cart = Provider.of<Cart>(context, listen: false);
+    final product = Provider.of<Product>(context);
+    // final cart = Provider.of<Cart>(context, listen: false);
 
     Locale locale = Localizations.localeOf(context);
     final currencyFormat = NumberFormat.simpleCurrency(
@@ -19,15 +20,20 @@ class ProductGridItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        cart.addItem(product.id, product.price, product.title);
+        Navigator.of(context).pushNamed(
+          ProductDetailsScreen.routeName,
+          arguments: product.id,
+        );
       },
       child: GridTile(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (product.imageUrl != null)
-              Image.network(
-                product.imageUrl,
+              Expanded(
+                child: Image.network(
+                  product.imageUrl,
+                ),
               ),
             Text(
               product.title,

@@ -33,10 +33,14 @@ class CartListItem extends StatelessWidget {
 
     return ListTile(
       leading: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          if (imageUrl != null) Image.network(imageUrl),
-          FlatButton(
-            onPressed: () {},
+          if (imageUrl != null)
+            Expanded(
+              child: Image.network(imageUrl),
+            ),
+          GestureDetector(
+            onTap: () {},
             child: Text('EDIT'),
           )
         ],
@@ -83,7 +87,7 @@ class CartListItem extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                   onPressed: () {
-                    cart.addItem(productId, price, title);
+                    cart.addItem(productId, price, title, imageUrl);
                   },
                 )
               ],

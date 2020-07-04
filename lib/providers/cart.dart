@@ -21,27 +21,35 @@ class Cart with ChangeNotifier {
   }
 
   double get totalAmount {
-    var total = 0.0;
-    _items.forEach((key, cartItem) {
-      total += cartItem.price * cartItem.quantity;
-    });
-    total += deliveryCharge;
+    var total = subTotal + deliveryCharge;
     return total;
+  }
+
+  double get subTotal {
+    var subTotal = 0.0;
+    _items.forEach((key, cartItem) {
+      subTotal += cartItem.price * cartItem.quantity;
+    });
+    return subTotal;
   }
 
   void addItem(
     String productId,
     double price,
     String title,
-  ) {
+    String imageUrl, {
+    int quantity,
+  }) {
     if (_items.containsKey(productId)) {
       _items.update(
         productId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
+          productId: existingCartItem.productId,
           title: existingCartItem.title,
           quantity: existingCartItem.quantity + 1,
           price: existingCartItem.price,
+          imageUrl: existingCartItem.imageUrl,
         ),
       );
     } else {
@@ -49,9 +57,11 @@ class Cart with ChangeNotifier {
         productId,
         () => CartItem(
           id: Uuid().v1(),
+          productId: productId,
           title: title,
-          quantity: 1,
+          quantity: quantity ?? 1,
           price: price,
+          imageUrl: imageUrl,
         ),
       );
     }
@@ -74,6 +84,7 @@ class Cart with ChangeNotifier {
           title: existingCartItem.title,
           quantity: existingCartItem.quantity - 1,
           price: existingCartItem.price,
+          imageUrl: existingCartItem.imageUrl,
         ),
       );
     } else if (_items[productId].quantity == 1) {
