@@ -13,6 +13,10 @@ class Orders with ChangeNotifier {
     return [..._items];
   }
 
+  Order findById(String id) {
+    return _items.firstWhere((order) => order.id == id);
+  }
+
   Future<void> fetchAndSetOrders() async {
     var url =
         'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json';
@@ -44,6 +48,10 @@ class Orders with ChangeNotifier {
                 )
                 .toList(),
             dateCreated: DateTime.parse(orderData['dateCreated']),
+            isSubmitted: orderData['isSubmitted'],
+            isProcessed: orderData['isProcessed'],
+            isBeingPrepared: orderData['isBeingPrepared'],
+            isOnTheWay: orderData['isOnTheWay'],
           ),
         );
       });
@@ -76,15 +84,23 @@ class Orders with ChangeNotifier {
                   })
               .toList(),
           'dateCreated': timestamp.toIso8601String(),
+          'isSubmitted': true,
+          'isProcessed': false,
+          'isBeingPrepared': false,
+          'isOnTheWay': false,
         }),
       );
+
       print(response.body);
+
       final newOrder = Order(
         id: json.decode(response.body)['name'],
         amount: amount,
         products: cartProducts,
         dateCreated: timestamp,
+        isSubmitted: true,
       );
+
       _items.insert(0, newOrder);
       notifyListeners();
     } catch (error) {

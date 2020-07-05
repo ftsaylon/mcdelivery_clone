@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mcdelivery_clone/screens/main_screen.dart';
 import '../providers/cart.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
@@ -24,7 +25,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final product = ModalRoute.of(context).settings.arguments;
     final productsData = Provider.of<Products>(context);
     final cart = Provider.of<Cart>(context);
 
@@ -114,7 +114,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     widget.product.imageUrl,
                     quantity: _quantity,
                   );
-                  Navigator.of(context).pop();
+                  _showAlertDialog(context);
                 },
                 child: Text(
                   'ADD TO MY BAG',
@@ -161,6 +161,74 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           },
         )
       ],
+    );
+  }
+
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        elevation: 10,
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Center(
+          child: Text(
+            'Successfully Added to Cart',
+          ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  Navigator.popUntil(
+                    context,
+                    ModalRoute.withName('/'),
+                  );
+                },
+                child: Text(
+                  'ADD MORE PRODUCTS',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        initialIndex: 2,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'PROCEED TO CHECKOUT',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

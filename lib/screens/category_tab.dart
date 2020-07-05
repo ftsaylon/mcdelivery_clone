@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/products_grid.dart';
+import '../widgets/product/products_grid.dart';
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({Key key, this.categoryId}) : super(key: key);

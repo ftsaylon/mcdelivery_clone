@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/cart.dart';
+import '../../providers/cart.dart';
 
 import 'cart_list_item.dart';
 
@@ -30,7 +30,13 @@ class CartList extends StatelessWidget {
             },
           )
         : Center(
-            child: Text('No items yet'),
+            child: Text(
+              'Your Cart is Empty',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           );
   }
 }

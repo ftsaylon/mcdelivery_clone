@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/screens/orders_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/menu_screen.dart';
-import '../widgets/app_drawer.dart';
 
 import 'cart_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
+  final initialIndex;
+
+  MainScreen({
+    Key key,
+    this.initialIndex,
+  }) : super(key: key);
 
   static const routeName = '/main';
 
@@ -17,11 +21,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   /* -------------------------- Bottom Navigation Bar ------------------------- */
-  int _selectedIndex = 0;
+  int _selectedIndex;
+
   List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
+    // HomeScreen(),
     MenuScreen(),
     OrdersScreen(),
+    CartScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -31,10 +37,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      title: Text('Home'),
-    ),
+    // BottomNavigationBarItem(
+    //   icon: Icon(Icons.home),
+    //   title: Text('Home'),
+    // ),
     BottomNavigationBarItem(
       icon: Icon(Icons.restaurant_menu),
       title: Text('Menu'),
@@ -43,22 +49,23 @@ class _MainScreenState extends State<MainScreen> {
       icon: Icon(Icons.history),
       title: Text('Orders'),
     ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.shopping_basket),
+      title: Text('Cart'),
+    ),
   ];
 /* -------------------------------------------------------------------------- */
+
+  @override
+  void initState() {
+    _selectedIndex = widget.initialIndex ?? 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_basket),
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
-            },
-          ),
-        ],
-      ),
-      drawer: AppDrawer(),
+      appBar: AppBar(),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomNavigationBarItems,

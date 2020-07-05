@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/widgets/product_grid_item.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mcdelivery_clone/providers/products.dart';
