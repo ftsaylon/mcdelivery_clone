@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mcdelivery_clone/providers/products.dart';
 import '../models/category.dart';
 import '../providers/categories.dart';
-import '../screens/cart_screen.dart';
 import '../screens/category_tab.dart';
-import '../widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -21,10 +20,24 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
   TabController _tabController;
 
+  var _isLoading = false;
+  var _isInit = true;
+
   @override
   void didChangeDependencies() {
-    categories = Provider.of<Categories>(context).items;
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).fetchAndSetProducts();
+      Provider.of<Categories>(context).fetchAndSetCategories().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
 
+    categories = Provider.of<Categories>(context).items;
     categoryTabs = categories.map((category) {
       return Tab(
         text: category.title.toUpperCase(),
@@ -32,7 +45,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
     }).toList();
 
     _tabController = TabController(vsync: this, length: categoryTabs.length);
-
+    _isInit = false;
     super.didChangeDependencies();
   }
 
@@ -45,34 +58,38 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Center(
-              child: TabBar(
-                isScrollable: true,
-                controller: _tabController,
-                tabs: categoryTabs,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
-              ),
+      child: (!_isLoading)
+          ? Column(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Center(
+                    child: TabBar(
+                      isScrollable: true,
+                      controller: _tabController,
+                      tabs: categoryTabs,
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.grey,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: categories.map((category) {
+                        return CategoryTab(
+                          categoryId: category.id,
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: TabBarView(
-                controller: _tabController,
-                children: categories.map((category) {
-                  return CategoryTab(
-                    categoryId: category.id,
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

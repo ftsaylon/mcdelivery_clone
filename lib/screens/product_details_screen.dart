@@ -72,7 +72,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           color: Theme.of(context).primaryColor,
                         ),
                         onPressed: () {
-                          // productsData.toggleFavoriteStatus(widget.product.id);
+                          productsData.toggleFavoriteStatus(widget.product.id);
                         },
                       ),
                       Row(

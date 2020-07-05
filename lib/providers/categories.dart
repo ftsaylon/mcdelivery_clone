@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/models/category.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:mcdelivery_clone/dummy_data.dart';
 
 class Categories with ChangeNotifier {
-  List<Category> _items = [...dummyCategories];
+  List<Category> _items = [];
 
   List<Category> get items {
     return [..._items];
@@ -12,5 +15,58 @@ class Categories with ChangeNotifier {
 
   Category findById(String id) {
     return _items.firstWhere((category) => category.id == id);
+  }
+
+  Future<void> fetchAndSetCategories() async {
+    var url =
+        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json';
+
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
+
+      final List<Category> loadedCategories = [];
+      extractedData.forEach((categoryId, categoryData) {
+        loadedCategories.add(
+          Category(
+            id: categoryId,
+            title: categoryData['title'],
+          ),
+        );
+      });
+      _items = loadedCategories;
+      notifyListeners();
+    } catch (error) {
+      throw (error);
+    }
+  }
+
+  Future<void> addCategory(Category category) async {
+    // var userId = authResult.user.uid;
+    // var authToken = authResult.user.getIdToken();
+
+    final url =
+        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json';
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': category.title,
+          // 'creatorId': userId,
+        }),
+      );
+      print(response.body);
+      final newCategory = Category(
+        title: category.title,
+        id: category.id,
+      );
+      _items.add(newCategory);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 }
