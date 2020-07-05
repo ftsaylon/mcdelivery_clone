@@ -67,19 +67,6 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    final newProduct = Product(
-      title: product.title,
-      categoryId: product.categoryId,
-      description: product.description,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      id: Uuid().v1(),
-    );
-    _items.add(newProduct);
-
-    // var userId = authResult.user.uid;
-    // var authToken = authResult.user.getIdToken();
-
     final url =
         'https://mcdelivery-clone-customer-app.firebaseio.com/products.json';
     try {
@@ -96,15 +83,14 @@ class Products with ChangeNotifier {
       );
       print(response.body);
       final newProduct = Product(
+        id: json.decode(response.body)['name'],
         title: product.title,
         categoryId: product.categoryId,
         description: product.description,
         price: product.price,
         imageUrl: product.imageUrl,
-        id: json.decode(response.body)['name'],
       );
       _items.add(newProduct);
-      // _items.insert(0, newProduct); // at the start of the list
       notifyListeners();
     } catch (error) {
       print(error);

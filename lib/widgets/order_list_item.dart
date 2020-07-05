@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mcdelivery_clone/providers/order.dart';
-import 'package:provider/provider.dart';
-import 'dart:math';
 
 class OrderListItem extends StatefulWidget {
-  const OrderListItem({Key key}) : super(key: key);
+  final Order order;
+
+  const OrderListItem({
+    Key key,
+    this.order,
+  }) : super(key: key);
 
   @override
   _OrderListItemState createState() => _OrderListItemState();
@@ -16,8 +19,6 @@ class _OrderListItemState extends State<OrderListItem> {
 
   @override
   Widget build(BuildContext context) {
-    final order = Provider.of<Order>(context);
-
     return Container(
       child: Card(
         margin: EdgeInsets.all(8),
@@ -25,9 +26,9 @@ class _OrderListItemState extends State<OrderListItem> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              title: Text('\$${order.amount}'),
+              title: Text('\$${widget.order.amount}'),
               subtitle: Text(
-                DateFormat('dd/MM/yyyy hh:mm').format(order.dateCreated),
+                DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateCreated),
               ),
               trailing: IconButton(
                 icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
@@ -43,7 +44,7 @@ class _OrderListItemState extends State<OrderListItem> {
                 padding: EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: order.products
+                  children: widget.order.products
                       .map(
                         (product) => Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

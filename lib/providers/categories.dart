@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/models/category.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:mcdelivery_clone/dummy_data.dart';
-
 class Categories with ChangeNotifier {
   List<Category> _items = [];
 
@@ -45,9 +43,6 @@ class Categories with ChangeNotifier {
   }
 
   Future<void> addCategory(Category category) async {
-    // var userId = authResult.user.uid;
-    // var authToken = authResult.user.getIdToken();
-
     final url =
         'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json';
     try {
@@ -60,8 +55,8 @@ class Categories with ChangeNotifier {
       );
       print(response.body);
       final newCategory = Category(
+        id: json.decode(response.body)['name'],
         title: category.title,
-        id: category.id,
       );
       _items.add(newCategory);
       notifyListeners();
