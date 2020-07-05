@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/providers/categories.dart';
-import 'package:mcdelivery_clone/providers/product.dart';
-import 'package:mcdelivery_clone/providers/products.dart';
-import 'package:mcdelivery_clone/screens/cart_screen.dart';
-import 'package:mcdelivery_clone/screens/menu_screen.dart';
-import 'package:mcdelivery_clone/screens/product_details_screen.dart';
+import './providers/categories.dart';
+import './providers/product.dart';
+import './providers/products.dart';
+import './screens/cart_screen.dart';
+import './screens/menu_screen.dart';
+import './screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/cart.dart';

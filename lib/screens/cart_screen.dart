@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mcdelivery_clone/providers/cart.dart';
-import 'package:mcdelivery_clone/widgets/cart_list.dart';
+import '../providers/cart.dart';
+import '../widgets/cart_list.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -93,7 +93,10 @@ class CartScreen extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       'NEXT',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

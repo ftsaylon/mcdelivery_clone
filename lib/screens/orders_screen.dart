@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/widgets/app_drawer.dart';
+import '../widgets/app_drawer.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key key}) : super(key: key);

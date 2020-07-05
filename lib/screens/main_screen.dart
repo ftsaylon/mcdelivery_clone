@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/screens/home_screen.dart';
-import 'package:mcdelivery_clone/screens/menu_screen.dart';
-import 'package:mcdelivery_clone/widgets/app_drawer.dart';
+import '../screens/home_screen.dart';
+import '../screens/menu_screen.dart';
+import '../widgets/app_drawer.dart';
 
 import 'cart_screen.dart';
 

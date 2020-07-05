@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/models/category.dart';
-import 'package:mcdelivery_clone/providers/categories.dart';
-import 'package:mcdelivery_clone/screens/cart_screen.dart';
-import 'package:mcdelivery_clone/screens/category_tab.dart';
-import 'package:mcdelivery_clone/widgets/app_drawer.dart';
+import '../models/category.dart';
+import '../providers/categories.dart';
+import '../screens/cart_screen.dart';
+import '../screens/category_tab.dart';
+import '../widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {

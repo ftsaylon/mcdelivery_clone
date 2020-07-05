@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mcdelivery_clone/providers/cart.dart';
+import '../providers/cart.dart';
 
 import 'cart_list_item.dart';
 

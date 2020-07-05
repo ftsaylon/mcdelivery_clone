@@ -9,12 +9,15 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Text(
-              'Hello, Customer!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'Hello, Customer!',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
             decoration: BoxDecoration(

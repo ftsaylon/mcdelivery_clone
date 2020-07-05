@@ -41,13 +41,14 @@ class Cart with ChangeNotifier {
     int quantity,
   }) {
     if (_items.containsKey(productId)) {
+      if (quantity == null) quantity = 1;
       _items.update(
         productId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
           productId: existingCartItem.productId,
           title: existingCartItem.title,
-          quantity: existingCartItem.quantity + 1,
+          quantity: existingCartItem.quantity + quantity,
           price: existingCartItem.price,
           imageUrl: existingCartItem.imageUrl,
         ),

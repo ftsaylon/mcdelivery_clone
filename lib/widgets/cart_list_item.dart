@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:mcdelivery_clone/models/cart_item.dart';
-import 'package:mcdelivery_clone/providers/cart.dart';
+import '../models/cart_item.dart';
+import '../providers/cart.dart';
 import 'package:provider/provider.dart';
 
 class CartListItem extends StatelessWidget {
@@ -39,7 +39,7 @@ class CartListItem extends StatelessWidget {
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Edit',
-          color: Theme.of(context).accentColor,
+          color: Colors.black45,
           icon: Icons.edit,
           onTap: () {},
         ),
