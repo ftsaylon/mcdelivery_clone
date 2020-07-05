@@ -47,7 +47,7 @@ class Cart with ChangeNotifier {
           id: existingCartItem.id,
           productId: existingCartItem.productId,
           title: existingCartItem.title,
-          quantity: existingCartItem.quantity + 1,
+          quantity: existingCartItem.quantity + quantity ?? 1,
           price: existingCartItem.price,
           imageUrl: existingCartItem.imageUrl,
         ),

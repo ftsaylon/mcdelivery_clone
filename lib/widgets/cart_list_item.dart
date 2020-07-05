@@ -39,7 +39,7 @@ class CartListItem extends StatelessWidget {
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Edit',
-          color: Theme.of(context).accentColor,
+          color: Colors.black45,
           icon: Icons.edit,
           onTap: () {},
         ),

@@ -93,7 +93,10 @@ class CartScreen extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       'NEXT',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
