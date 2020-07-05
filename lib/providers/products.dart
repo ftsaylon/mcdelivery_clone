@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import 'product.dart';
 
-import '../dummy_data.dart';
+import 'package:mcdelivery_clone/dummy_data.dart';
 
 class Products with ChangeNotifier {
-  final Firestore _db = Firestore.instance;
-
   List<Product> _items = [
     ...dummyProducts,
   ];
@@ -17,40 +14,47 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
-  Stream<Product> streamProduct(String id) {
-    return _db
-        .collection('products')
-        .document(id)
-        .snapshots()
-        .map((document) => Product.fromFirestore(document));
+  Product findById(String id) {
+    return _items.firstWhere((product) => product.id == id);
   }
 
-  Stream<List<Product>> streamProducts() {
-    var reference = _db.collection('products');
-    return reference.snapshots().map((list) => list.documents
-        .map((document) => Product.fromFirestore(document))
-        .toList());
+  List<Product> get favoriteItems {
+    return _items.where((product) => product.isFavorite).toList();
   }
 
-  Stream<List<Product>> streamProductsByCategory(String categoryId) {
-    var reference =
-        _db.collection('products').where('categoryId', isEqualTo: categoryId);
-    return reference.snapshots().map((list) => list.documents
-        .map((document) => Product.fromFirestore(document))
-        .toList());
+  List<Product> getProductsByCategory(String categoryId) {
+    return [..._items.where((product) => product.categoryId == categoryId)];
   }
 
-  // List<Product> getProductsByCategory(String categoryId) {
-  //   return [..._items.where((product) => product.categoryId == categoryId)];
-  // }
+  void addProduct(Product product) {
+    final newProduct = Product(
+      title: product.title,
+      categoryId: product.categoryId,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      id: Uuid().v1(),
+    );
+    _items.add(newProduct);
+    notifyListeners();
+  }
 
-  // List<Product> get favoriteItems {
-  //   return _items.where((product) => product.isFavorite).toList();
-  // }
+  void updateProduct(String id, Product newProduct) {
+    final productIndex = _items.indexWhere((product) => product.id == id);
+    if (productIndex >= 0) {
+      _items[productIndex] = newProduct;
+      notifyListeners();
+    }
+  }
 
-  // Future<void> toggleFavoriteStatus(String id) async {
-  //   final product = findById(id);
-  //   product..toggleFavoriteStatus();
-  //   notifyListeners();
-  // }
+  void deleteProduct(String id) {
+    final productIndex = _items.indexWhere((product) => product.id == id);
+    _items.removeAt(productIndex);
+    notifyListeners();
+  }
+
+  void toggleFavoriteStatus(String id) {
+    findById(id).toggleFavoriteStatus();
+    notifyListeners();
+  }
 }

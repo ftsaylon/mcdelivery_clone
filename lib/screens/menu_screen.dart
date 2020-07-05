@@ -23,7 +23,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    categories = Provider.of<Categories>(context, listen: false).items;
+    categories = Provider.of<Categories>(context).items;
 
     categoryTabs = categories.map((category) {
       return Tab(

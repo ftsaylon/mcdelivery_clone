@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/category.dart';
+import 'package:mcdelivery_clone/models/category.dart';
 
-import '../dummy_data.dart';
+import 'package:mcdelivery_clone/dummy_data.dart';
 
 class Categories with ChangeNotifier {
   List<Category> _items = [...dummyCategories];

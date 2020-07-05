@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mcdelivery_clone/providers/orders.dart';
 import './providers/categories.dart';
 import './providers/product.dart';
 import './providers/products.dart';
@@ -25,6 +25,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Cart(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Orders(),
         ),
       ],
       child: MaterialApp(

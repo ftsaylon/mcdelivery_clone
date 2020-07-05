@@ -6,16 +6,12 @@ import '../screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductGridItem extends StatelessWidget {
-  final Product product;
-
-  const ProductGridItem({
-    Key key,
-    this.product,
-  }) : super(key: key);
+  const ProductGridItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final cart = Provider.of<Cart>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
+    final product = Provider.of<Product>(context, listen: false);
 
     Locale locale = Localizations.localeOf(context);
     final currencyFormat = NumberFormat.simpleCurrency(
