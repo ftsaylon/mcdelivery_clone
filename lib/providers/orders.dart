@@ -9,6 +9,10 @@ import '../models/cart_item.dart';
 class Orders with ChangeNotifier {
   List<Order> _items = [];
 
+  String authToken;
+
+  Orders(this.authToken, this._items);
+
   List<Order> get items {
     return [..._items];
   }
@@ -19,7 +23,7 @@ class Orders with ChangeNotifier {
 
   Future<void> fetchAndSetOrders() async {
     var url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json?auth=$authToken';
 
     try {
       final response = await http.get(url);
@@ -64,7 +68,7 @@ class Orders with ChangeNotifier {
 
   Future<void> addOrder(List<CartItem> cartProducts, double amount) async {
     final url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json?auth=$authToken';
 
     final timestamp = DateTime.now();
 

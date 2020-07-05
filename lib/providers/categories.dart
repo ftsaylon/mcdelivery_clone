@@ -7,6 +7,10 @@ import 'package:http/http.dart' as http;
 class Categories with ChangeNotifier {
   List<Category> _items = [];
 
+  String authToken;
+
+  Categories(this.authToken, this._items);
+
   List<Category> get items {
     return [..._items];
   }
@@ -17,7 +21,7 @@ class Categories with ChangeNotifier {
 
   Future<void> fetchAndSetCategories() async {
     var url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json?auth=$authToken';
 
     try {
       final response = await http.get(url);
@@ -44,7 +48,7 @@ class Categories with ChangeNotifier {
 
   Future<void> addCategory(Category category) async {
     final url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/categories.json?auth=$authToken';
     try {
       final response = await http.post(
         url,

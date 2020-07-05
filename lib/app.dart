@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/providers/orders.dart';
 import './providers/categories.dart';
 import './providers/product.dart';
@@ -9,8 +10,10 @@ import './screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/cart.dart';
+import 'screens/auth_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/main_screen.dart';
+import 'screens/splash_screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -18,33 +21,59 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-          value: Products(),
+          value: Auth(),
         ),
-        ChangeNotifierProvider.value(
-          value: Categories(),
+        ChangeNotifierProxyProvider<Auth, Products>(
+          create: (_) => Products('', []),
+          update: (_, auth, previousProducts) => Products(
+            auth.token,
+            previousProducts.items,
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, Categories>(
+          create: (_) => Categories('', []),
+          update: (_, auth, previousCategories) => Categories(
+            auth.token,
+            previousCategories.items,
+          ),
         ),
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
-        ChangeNotifierProvider.value(
-          value: Orders(),
+        ChangeNotifierProxyProvider<Auth, Orders>(
+          create: (_) => Orders('', []),
+          update: (_, auth, previousOrders) => Orders(
+            auth.token,
+            previousOrders.items,
+          ),
         ),
       ],
-      child: MaterialApp(
-        title: 'Food Delivery',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-          accentColor: Colors.yellow,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+      child: Consumer<Auth>(
+        builder: (context, auth, _) => MaterialApp(
+          title: 'Food Delivery',
+          theme: ThemeData(
+            primarySwatch: Colors.red,
+            accentColor: Colors.yellow,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: auth.isAuth
+              ? MainScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? SplashScreen()
+                          : AuthScreen(),
+                ),
+          routes: {
+            MainScreen.routeName: (context) => MainScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+            MenuScreen.routeName: (context) => MenuScreen(),
+            CartScreen.routeName: (context) => CartScreen(),
+            ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
+          },
         ),
-        home: MainScreen(),
-        routes: {
-          MainScreen.routeName: (context) => MainScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
-          MenuScreen.routeName: (context) => MenuScreen(),
-          CartScreen.routeName: (context) => CartScreen(),
-          ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
-        },
       ),
     );
   }

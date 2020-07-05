@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 
 import 'product.dart';
 
-import 'package:mcdelivery_clone/dummy_data.dart';
-
 class Products with ChangeNotifier {
   List<Product> _items = [];
+
+  final String authToken;
+
+  Products(this.authToken, this._items);
 
   List<Product> get items {
     return [..._items];
@@ -18,7 +18,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     var url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/products.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/products.json?auth=$authToken';
 
     try {
       final response = await http.get(url);
@@ -68,7 +68,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product product) async {
     final url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/products.json';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.post(
         url,

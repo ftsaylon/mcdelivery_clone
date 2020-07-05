@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/screens/orders_screen.dart';
+import 'package:provider/provider.dart';
 import '../screens/home_screen.dart';
 import '../screens/menu_screen.dart';
 
@@ -75,6 +77,14 @@ class _MainScreenState extends State<MainScreen> {
             Text('McDelivery'),
           ],
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Provider.of<Auth>(context, listen: false).logout();
+            },
+          ),
+        ],
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
