@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mcdelivery_clone/screens/orders_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/menu_screen.dart';
 import '../widgets/app_drawer.dart';
@@ -20,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     MenuScreen(),
+    OrdersScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,6 +38,10 @@ class _MainScreenState extends State<MainScreen> {
     BottomNavigationBarItem(
       icon: Icon(Icons.restaurant_menu),
       title: Text('Menu'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.history),
+      title: Text('Orders'),
     ),
   ];
 /* -------------------------------------------------------------------------- */

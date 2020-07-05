@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/order.dart';
+import 'order.dart';
 import '../models/cart_item.dart';
 
 class Orders with ChangeNotifier {
-  List<Order> _orders = [];
+  List<Order> _items = [];
 
-  List<Order> get orders {
-    return [..._orders];
+  List<Order> get items {
+    return [..._items];
   }
 
   void addOrder(
@@ -16,7 +16,7 @@ class Orders with ChangeNotifier {
     double total,
   ) {
     final timestamp = DateTime.now();
-    _orders.insert(
+    _items.insert(
       0,
       Order(
         id: Uuid().v1(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mcdelivery_clone/providers/orders.dart';
 import '../providers/cart.dart';
 import '../widgets/cart_list.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    final orders = Provider.of<Orders>(context);
 
     Locale locale = Localizations.localeOf(context);
     final currencyFormat = NumberFormat.simpleCurrency(
@@ -90,9 +92,16 @@ class CartScreen extends StatelessWidget {
                   width: double.infinity,
                   child: RaisedButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      orders.addOrder(
+                        cart.items.values.toList(),
+                        cart.totalAmount,
+                      );
+                      cart.clear();
+                      Navigator.of(context).pop();
+                    },
                     child: Text(
-                      'NEXT',
+                      'CHECKOUT',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
