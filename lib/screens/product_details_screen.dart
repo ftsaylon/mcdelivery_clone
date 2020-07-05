@@ -34,7 +34,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Row(
+          children: <Widget>[
+            Image.asset(
+              'assets/images/logo/simple_logo.png',
+              height: MediaQuery.of(context).size.width * 0.15,
+            ),
+            Text('McDelivery'),
+          ],
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.all(8),
         child: Column(

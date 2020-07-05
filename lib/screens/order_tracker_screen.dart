@@ -16,6 +16,15 @@ class OrderTrackerScreen extends StatelessWidget {
     final order = Provider.of<Orders>(context).findById(orderId);
     return Scaffold(
       appBar: AppBar(
+        title: Row(
+          children: <Widget>[
+            Image.asset(
+              'assets/images/logo/simple_logo.png',
+              height: MediaQuery.of(context).size.width * 0.15,
+            ),
+            Text('McDelivery'),
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.replay),
