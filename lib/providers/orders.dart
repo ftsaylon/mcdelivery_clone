@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mcdelivery_clone/models/user.dart';
 
 import 'order.dart';
 import '../models/cart_item.dart';
@@ -15,6 +16,7 @@ class Orders with ChangeNotifier {
   Orders(this.authToken, this.userId, this._items);
 
   List<Order> get items {
+    _items.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
     return [..._items];
   }
 
@@ -53,6 +55,10 @@ class Orders with ChangeNotifier {
                   ),
                 )
                 .toList(),
+            customerName: orderData['customerName'],
+            address: orderData['address'],
+            remarks: orderData['remarks'],
+            changeFor: orderData['changeFor'],
             dateCreated: DateTime.parse(orderData['dateCreated']),
             isSubmitted: orderData['isSubmitted'],
             isProcessed: orderData['isProcessed'],
@@ -68,7 +74,14 @@ class Orders with ChangeNotifier {
     }
   }
 
-  Future<void> addOrder(List<CartItem> cartProducts, double amount) async {
+  Future<String> addOrder(
+    List<CartItem> cartProducts,
+    double amount,
+    String customerName,
+    String address,
+    String remarks,
+    double changeFor,
+  ) async {
     final url =
         'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json?auth=$authToken';
 
@@ -89,6 +102,10 @@ class Orders with ChangeNotifier {
                     'imageUrl': cartProduct.imageUrl,
                   })
               .toList(),
+          'customerName': customerName,
+          'address': address,
+          'remarks': remarks,
+          'changeFor': changeFor,
           'dateCreated': timestamp.toIso8601String(),
           'isSubmitted': true,
           'isProcessed': false,
@@ -98,18 +115,21 @@ class Orders with ChangeNotifier {
         }),
       );
 
-      print(response.body);
-
       final newOrder = Order(
         id: json.decode(response.body)['name'],
         amount: amount,
         products: cartProducts,
         dateCreated: timestamp,
+        customerName: customerName,
+        address: address,
+        remarks: remarks,
+        changeFor: changeFor,
         isSubmitted: true,
       );
 
-      _items.insert(0, newOrder);
+      _items.add(newOrder);
       notifyListeners();
+      return newOrder.id;
     } catch (error) {
       throw (error);
     }

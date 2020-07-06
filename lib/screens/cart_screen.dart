@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/providers/orders.dart';
+import 'package:mcdelivery_clone/screens/checkout_screen.dart';
 import '../providers/cart.dart';
 import '../widgets/cart/cart_list.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
     final orders = Provider.of<Orders>(context);
+    final user = Provider.of<Auth>(context).user;
 
     Locale locale = Localizations.localeOf(context);
     final currencyFormat = NumberFormat.simpleCurrency(
@@ -93,18 +96,22 @@ class CartScreen extends StatelessWidget {
                 child: RaisedButton(
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
-                    orders.addOrder(
-                      cart.items.values.toList(),
-                      cart.totalAmount,
-                    );
-                    cart.clear();
-                    Navigator.popUntil(
+                    Navigator.push(
                       context,
-                      ModalRoute.withName('/'),
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return CheckoutScreen(
+                            cartProducts: cart.items.values.toList(),
+                            amount: cart.totalAmount,
+                            customerName: '${user.firstName} ${user.lastName}',
+                            address: user.address,
+                          );
+                        },
+                      ),
                     );
                   },
                   child: Text(
-                    'CHECKOUT',
+                    'NEXT',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

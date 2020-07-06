@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/screens/orders_screen.dart';
+import 'package:mcdelivery_clone/screens/user_screen.dart';
 import 'package:provider/provider.dart';
 import '../screens/menu_screen.dart';
 
@@ -25,10 +26,10 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex;
 
   List<Widget> _widgetOptions = <Widget>[
-    // HomeScreen(),
     MenuScreen(),
     OrdersScreen(),
     CartScreen(),
+    UserScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -38,10 +39,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    // BottomNavigationBarItem(
-    //   icon: Icon(Icons.home),
-    //   title: Text('Home'),
-    // ),
     BottomNavigationBarItem(
       icon: Icon(Icons.restaurant_menu),
       title: Text('Menu'),
@@ -53,6 +50,10 @@ class _MainScreenState extends State<MainScreen> {
     BottomNavigationBarItem(
       icon: Icon(Icons.shopping_basket),
       title: Text('Cart'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.person),
+      title: Text('Profile'),
     ),
   ];
 /* -------------------------------------------------------------------------- */
@@ -87,6 +88,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.grey,
         items: _bottomNavigationBarItems,
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).primaryColor,

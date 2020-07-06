@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/providers/orders.dart';
+import 'package:mcdelivery_clone/screens/user_screen.dart';
 import './providers/categories.dart';
 import './providers/products.dart';
 import './screens/cart_screen.dart';
@@ -71,6 +72,7 @@ class App extends StatelessWidget {
             MenuScreen.routeName: (context) => MenuScreen(),
             CartScreen.routeName: (context) => CartScreen(),
             ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
+            UserScreen.routeName: (context) => UserScreen(),
           },
         ),
       ),

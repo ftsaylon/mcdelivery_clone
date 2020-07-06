@@ -7,19 +7,27 @@ class Order with ChangeNotifier {
   final double amount;
   final List<CartItem> products;
   final DateTime dateCreated;
-  bool isSubmitted = false;
-  bool isProcessed = false;
-  bool isBeingPrepared = false;
-  bool isOnTheWay = false;
+  final String address;
+  final String customerName;
+  final String remarks;
+  final double changeFor;
+  bool isSubmitted;
+  bool isProcessed;
+  bool isBeingPrepared;
+  bool isOnTheWay;
 
   Order({
     this.id,
     this.amount,
     this.products,
     this.dateCreated,
+    this.address,
+    this.customerName,
+    this.remarks,
+    this.changeFor,
     this.isSubmitted,
-    this.isProcessed,
-    this.isBeingPrepared,
-    this.isOnTheWay,
+    this.isProcessed = false,
+    this.isBeingPrepared = false,
+    this.isOnTheWay = false,
   });
 }

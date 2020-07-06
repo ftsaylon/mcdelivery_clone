@@ -182,64 +182,70 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         elevation: 10,
-        titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Center(
-          child: Text(
-            'Successfully Added to Cart',
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                onPressed: () {
-                  Navigator.popUntil(
-                    context,
-                    ModalRoute.withName('/'),
-                  );
-                },
-                child: Text(
-                  'ADD MORE PRODUCTS',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                width: 150,
+                padding: EdgeInsets.all(10),
+                child: Image.asset('assets/images/cart.png'),
+              ),
+              Text(
+                'Added to Cart!',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MainScreen(
-                        initialIndex: 2,
-                      ),
+              SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                child: RaisedButton(
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {
+                    Navigator.popUntil(
+                      context,
+                      ModalRoute.withName('/'),
+                    );
+                  },
+                  child: Text(
+                    'ADD MORE PRODUCTS',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                  );
-                },
-                child: Text(
-                  'PROCEED TO CHECKOUT',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                width: double.infinity,
+                child: RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(
+                          initialIndex: 2,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'PROCEED TO CHECKOUT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
