@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/models/cart_item.dart';
-import 'package:mcdelivery_clone/models/user.dart';
 import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/providers/cart.dart';
-import 'package:mcdelivery_clone/providers/order.dart';
 import 'package:mcdelivery_clone/providers/orders.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +10,10 @@ import 'order_tracker_screen.dart';
 class CheckoutScreen extends StatefulWidget {
   static const routeName = '/user';
 
-  List<CartItem> cartProducts;
-  double amount;
-  String customerName;
-  String address;
+  final List<CartItem> cartProducts;
+  final double amount;
+  final String customerName;
+  final String address;
 
   CheckoutScreen({
     Key key,
@@ -149,7 +147,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       decoration: InputDecoration(labelText: 'Customer Name'),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
-                        FocusScope.of(context).requestFocus();
+                        FocusScope.of(context).requestFocus(_addressFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
@@ -176,7 +174,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       decoration: InputDecoration(labelText: 'Address'),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
-                        FocusScope.of(context).requestFocus(_addressFocusNode);
+                        FocusScope.of(context).requestFocus(_remarksFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
@@ -202,7 +200,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       decoration: InputDecoration(labelText: 'Remarks'),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
-                        FocusScope.of(context).requestFocus(FocusNode());
+                        FocusScope.of(context)
+                            .requestFocus(_changeForFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {

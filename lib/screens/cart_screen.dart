@@ -95,21 +95,24 @@ class CartScreen extends StatelessWidget {
                 width: double.infinity,
                 child: RaisedButton(
                   color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return CheckoutScreen(
-                            cartProducts: cart.items.values.toList(),
-                            amount: cart.totalAmount,
-                            customerName: '${user.firstName} ${user.lastName}',
-                            address: user.address,
+                  onPressed: (cart.items.isNotEmpty)
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return CheckoutScreen(
+                                  cartProducts: cart.items.values.toList(),
+                                  amount: cart.totalAmount,
+                                  customerName:
+                                      '${user.firstName} ${user.lastName}',
+                                  address: user.address,
+                                );
+                              },
+                            ),
                           );
-                        },
-                      ),
-                    );
-                  },
+                        }
+                      : null,
                   child: Text(
                     'NEXT',
                     style: TextStyle(
