@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/providers/orders.dart';
 import './providers/categories.dart';
-import './providers/product.dart';
 import './providers/products.dart';
 import './screens/cart_screen.dart';
 import './screens/menu_screen.dart';
@@ -11,7 +10,6 @@ import 'package:provider/provider.dart';
 
 import 'providers/cart.dart';
 import 'screens/auth_screen.dart';
-import 'screens/home_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/splash_screen.dart';
 
@@ -24,9 +22,10 @@ class App extends StatelessWidget {
           value: Auth(),
         ),
         ChangeNotifierProxyProvider<Auth, Products>(
-          create: (_) => Products('', []),
+          create: (_) => Products('', '', []),
           update: (_, auth, previousProducts) => Products(
             auth.token,
+            auth.userId,
             previousProducts.items,
           ),
         ),
@@ -68,7 +67,6 @@ class App extends StatelessWidget {
                 ),
           routes: {
             MainScreen.routeName: (context) => MainScreen(),
-            HomeScreen.routeName: (context) => HomeScreen(),
             MenuScreen.routeName: (context) => MenuScreen(),
             CartScreen.routeName: (context) => CartScreen(),
             ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),

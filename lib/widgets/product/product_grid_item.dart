@@ -20,13 +20,9 @@ class ProductGridItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsScreen(
-              product: product,
-            ),
-          ),
+        Navigator.of(context).pushNamed(
+          ProductDetailsScreen.routeName,
+          arguments: product.id,
         );
       },
       child: GridTile(

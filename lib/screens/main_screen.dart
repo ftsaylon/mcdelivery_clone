@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:mcdelivery_clone/screens/orders_screen.dart';
 import 'package:provider/provider.dart';
-import '../screens/home_screen.dart';
 import '../screens/menu_screen.dart';
 
 import 'cart_screen.dart';

@@ -9,8 +9,13 @@ class Products with ChangeNotifier {
   List<Product> _items = [];
 
   final String authToken;
+  final String userId;
 
-  Products(this.authToken, this._items);
+  Products(
+    this.authToken,
+    this.userId,
+    this._items,
+  );
 
   List<Product> get items {
     return [..._items];
@@ -27,10 +32,10 @@ class Products with ChangeNotifier {
         return;
       }
 
-      // url =
-      //     'https://mcdelivery-clone-customer-app.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
-      // final favoriteResponse = await http.get(url);
-      // final favoriteData = json.decode(favoriteResponse.body);
+      url =
+          'https://mcdelivery-clone-customer-app.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
 
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
@@ -41,8 +46,8 @@ class Products with ChangeNotifier {
             categoryId: prodData['categoryId'],
             description: prodData['description'],
             price: prodData['price'],
-            // isFavorite:
-            //     favoriteData == null ? false : favoriteData[prodId] ?? false,
+            isFavorite:
+                favoriteData == null ? false : favoriteData[prodId] ?? false,
             imageUrl: prodData['imageUrl'],
           ),
         );
@@ -113,8 +118,8 @@ class Products with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteStatus(String id) {
-    findById(id).toggleFavoriteStatus();
+  void toggleFavoriteStatus(String authToken, String userId, String productId) {
+    findById(productId).toggleFavoriteStatus(authToken, userId);
     notifyListeners();
   }
 }
