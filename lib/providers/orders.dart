@@ -10,8 +10,9 @@ class Orders with ChangeNotifier {
   List<Order> _items = [];
 
   String authToken;
+  String userId;
 
-  Orders(this.authToken, this._items);
+  Orders(this.authToken, this.userId, this._items);
 
   List<Order> get items {
     return [..._items];
@@ -22,8 +23,9 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetOrders() async {
+    final filterString = 'orderBy="creatorId"&equalTo="$userId"';
     var url =
-        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json?auth=$authToken';
+        'https://mcdelivery-clone-customer-app.firebaseio.com/orders.json?auth=$authToken&$filterString';
 
     try {
       final response = await http.get(url);
@@ -92,6 +94,7 @@ class Orders with ChangeNotifier {
           'isProcessed': false,
           'isBeingPrepared': false,
           'isOnTheWay': false,
+          'creatorId': userId,
         }),
       );
 
