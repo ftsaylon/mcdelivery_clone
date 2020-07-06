@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
-import 'package:mcdelivery_clone/screens/orders_screen.dart';
-import 'package:mcdelivery_clone/screens/user_screen.dart';
 import 'package:provider/provider.dart';
-import '../screens/menu_screen.dart';
 
+import '../providers/auth.dart';
+
+import '../screens/orders_screen.dart';
+import '../screens/user_screen.dart';
+import '../screens/menu_screen.dart';
 import 'cart_screen.dart';
 
 class MainScreen extends StatefulWidget {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/models/cart_item.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
-import 'package:mcdelivery_clone/providers/cart.dart';
-import 'package:mcdelivery_clone/providers/orders.dart';
 import 'package:provider/provider.dart';
+
+import '../models/cart_item.dart';
+
+import '../providers/auth.dart';
+import '../providers/cart.dart';
+import '../providers/orders.dart';
 
 import 'order_tracker_screen.dart';
 

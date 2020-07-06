@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/providers/products.dart';
-import '../models/category.dart';
-import '../providers/categories.dart';
-import '../screens/category_tab.dart';
 import 'package:provider/provider.dart';
+
+import '../models/category.dart';
+
+import '../providers/products.dart';
+import '../providers/categories.dart';
+
+import '../screens/category_tab.dart';
 
 class MenuScreen extends StatefulWidget {
   MenuScreen({Key key}) : super(key: key);

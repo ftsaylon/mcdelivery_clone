@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
-import 'package:mcdelivery_clone/providers/orders.dart';
-import 'package:mcdelivery_clone/screens/user_screen.dart';
-import './providers/categories.dart';
-import './providers/products.dart';
-import './screens/cart_screen.dart';
-import './screens/menu_screen.dart';
-import './screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
+import './providers/auth.dart';
+import './providers/orders.dart';
+import './providers/categories.dart';
+import './providers/products.dart';
 import 'providers/cart.dart';
+
 import 'screens/auth_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/splash_screen.dart';
+import './screens/user_screen.dart';
+import './screens/cart_screen.dart';
+import './screens/menu_screen.dart';
+import './screens/product_details_screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -51,7 +52,7 @@ class App extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (context, auth, _) => MaterialApp(
-          title: 'Food Delivery',
+          title: 'McDelivery Clone',
           theme: ThemeData(
             primarySwatch: Colors.red,
             accentColor: Colors.yellow,

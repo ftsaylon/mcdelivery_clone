@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/providers/orders.dart';
-import '../widgets/order/order_list_item.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/orders.dart';
+
+import '../widgets/order/order_list_item.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key key}) : super(key: key);

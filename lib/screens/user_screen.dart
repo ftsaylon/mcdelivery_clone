@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mcdelivery_clone/models/user.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
 import 'package:provider/provider.dart';
+
+import '../models/user.dart';
+
+import '../providers/auth.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/user';

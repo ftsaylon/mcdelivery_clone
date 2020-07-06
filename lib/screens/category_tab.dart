@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/product/products_grid.dart';
 
 class CategoryTab extends StatelessWidget {

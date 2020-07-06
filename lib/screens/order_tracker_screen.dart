@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mcdelivery_clone/providers/orders.dart';
+import '../providers/orders.dart';
 
 class OrderTrackerScreen extends StatelessWidget {
   final String orderId;

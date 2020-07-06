@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
-import 'package:mcdelivery_clone/providers/orders.dart';
-import 'package:mcdelivery_clone/screens/checkout_screen.dart';
-import '../providers/cart.dart';
-import '../widgets/cart/cart_list.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
-import 'main_screen.dart';
+import '../providers/auth.dart';
+import '../providers/orders.dart';
+import '../providers/cart.dart';
+
+import '../screens/checkout_screen.dart';
+
+import '../widgets/cart/cart_list.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key key}) : super(key: key);

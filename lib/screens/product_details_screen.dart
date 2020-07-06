@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:mcdelivery_clone/providers/auth.dart';
-import 'package:mcdelivery_clone/screens/main_screen.dart';
-import '../providers/cart.dart';
-import '../providers/product.dart';
-import '../providers/products.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
+import '../providers/auth.dart';
+import '../providers/cart.dart';
+import '../providers/products.dart';
+
+import '../screens/main_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key key}) : super(key: key);

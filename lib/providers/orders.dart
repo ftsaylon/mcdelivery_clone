@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mcdelivery_clone/models/user.dart';
+
+import '../models/cart_item.dart';
 
 import 'order.dart';
-import '../models/cart_item.dart';
 
 class Orders with ChangeNotifier {
   List<Order> _items = [];
