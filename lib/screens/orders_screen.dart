@@ -27,40 +27,42 @@ class OrdersScreen extends StatelessWidget {
               child: Text('An error occurred!'),
             );
           } else {
-            return Consumer<Orders>(builder: (context, orderData, child) {
-              return (orderData.items.length > 0)
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(24),
-                          child: Text(
-                            'ORDER HISTORY',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+            return Consumer<Orders>(
+              builder: (context, orderData, child) {
+                return (orderData.items.length > 0)
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(24),
+                            child: Text(
+                              'ORDER HISTORY',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: orderData.items.length,
-                            itemBuilder: (context, index) =>
-                                OrderListItem(order: orderData.items[index]),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: orderData.items.length,
+                              itemBuilder: (context, index) =>
+                                  OrderListItem(order: orderData.items[index]),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Center(
+                        child: Text(
+                          'You Have No Orders Yet!',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    )
-                  : Center(
-                      child: Text(
-                        'You Have No Orders Yet!',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    );
-            });
+                      );
+              },
+            );
           }
         }
       },
