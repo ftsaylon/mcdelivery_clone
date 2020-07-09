@@ -199,17 +199,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     TextFormField(
                       initialValue: _initValues['remarks'],
-                      decoration: InputDecoration(labelText: 'Remarks'),
+                      decoration:
+                          InputDecoration(labelText: 'Remarks (Optional)'),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context)
                             .requestFocus(_changeForFocusNode);
-                      },
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please provide a value.';
-                        }
-                        return null;
                       },
                       onSaved: (value) {
                         setState(() {
