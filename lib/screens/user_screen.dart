@@ -41,11 +41,13 @@ class _UserScreenState extends State<UserScreen> {
   void didChangeDependencies() {
     if (_isInit) {
       _editedUser = Provider.of<Auth>(context).user;
-      _initValues = {
-        'firstName': _editedUser.firstName ?? '',
-        'lastName': _editedUser.lastName ?? '',
-        'address': _editedUser.address ?? '',
-      };
+      if (_editedUser != null) {
+        _initValues = {
+          'firstName': _editedUser.firstName ?? '',
+          'lastName': _editedUser.lastName ?? '',
+          'address': _editedUser.address ?? '',
+        };
+      }
     }
     _isInit = false;
     super.didChangeDependencies();
