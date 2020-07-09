@@ -6,7 +6,7 @@ import '../providers/auth.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_screen.dart';
 import '../screens/menu_screen.dart';
-import 'cart_screen.dart';
+import '../screens/cart_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final initialIndex;

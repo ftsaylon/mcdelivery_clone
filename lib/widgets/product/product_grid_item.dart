@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../../providers/cart.dart';
-import '../../providers/product.dart';
-import '../../screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
+import '../../providers/product.dart';
+
+import '../../screens/product_details_screen.dart';
 
 class ProductGridItem extends StatelessWidget {
   const ProductGridItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context, listen: false);
     final product = Provider.of<Product>(context, listen: false);
 
     Locale locale = Localizations.localeOf(context);

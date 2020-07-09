@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:intl/intl.dart';
-import '../../providers/cart.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
+import '../../providers/cart.dart';
 
 class CartListItem extends StatelessWidget {
   final String id;

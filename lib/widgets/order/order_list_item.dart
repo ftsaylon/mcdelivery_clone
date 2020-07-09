@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mcdelivery_clone/providers/order.dart';
-import 'package:mcdelivery_clone/screens/order_tracker_screen.dart';
+
+import '../../providers/order.dart';
+
+import '../../screens/order_tracker_screen.dart';
 
 class OrderListItem extends StatefulWidget {
   final Order order;

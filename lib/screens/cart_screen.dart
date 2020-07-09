@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import '../providers/auth.dart';
-import '../providers/orders.dart';
 import '../providers/cart.dart';
 
 import '../screens/checkout_screen.dart';
@@ -18,7 +17,6 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
-    final orders = Provider.of<Orders>(context);
     final user = Provider.of<Auth>(context).user;
 
     Locale locale = Localizations.localeOf(context);

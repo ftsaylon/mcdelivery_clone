@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/cart_item.dart';
 
-import 'order.dart';
+import '../providers/order.dart';
 
 class Orders with ChangeNotifier {
   List<Order> _items = [];

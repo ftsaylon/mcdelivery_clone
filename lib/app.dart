@@ -5,11 +5,11 @@ import './providers/auth.dart';
 import './providers/orders.dart';
 import './providers/categories.dart';
 import './providers/products.dart';
-import 'providers/cart.dart';
+import './providers/cart.dart';
 
-import 'screens/auth_screen.dart';
-import 'screens/main_screen.dart';
-import 'screens/splash_screen.dart';
+import './screens/auth_screen.dart';
+import './screens/main_screen.dart';
+import './screens/splash_screen.dart';
 import './screens/user_screen.dart';
 import './screens/cart_screen.dart';
 import './screens/menu_screen.dart';
