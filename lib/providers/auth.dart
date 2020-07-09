@@ -203,7 +203,6 @@ class Auth with ChangeNotifier {
         address: user.address,
       );
       _user = newUser;
-      print(_user.firstName);
       notifyListeners();
     } catch (error) {
       throw (error);

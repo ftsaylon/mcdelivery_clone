@@ -14,7 +14,6 @@ class OrderTrackerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final order = Provider.of<Orders>(context).findById(orderId);
-    print('ORDER ID:' + order.id);
     return Scaffold(
       appBar: AppBar(
         title: Row(

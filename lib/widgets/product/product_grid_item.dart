@@ -25,12 +25,14 @@ class ProductGridItem extends StatelessWidget {
           arguments: product.id,
         );
       },
-      child: GridTile(
+      child: Container(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (product.imageUrl != null)
-              Expanded(
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
                 child: Image.network(
                   product.imageUrl,
                 ),

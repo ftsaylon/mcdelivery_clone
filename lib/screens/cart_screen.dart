@@ -103,9 +103,10 @@ class CartScreen extends StatelessWidget {
                                 return CheckoutScreen(
                                   cartProducts: cart.items.values.toList(),
                                   amount: cart.totalAmount,
-                                  customerName:
-                                      '${user.firstName} ${user.lastName}',
-                                  address: user.address,
+                                  customerName: (user != null)
+                                      ? '${user.firstName} ${user.lastName}'
+                                      : null,
+                                  address: (user != null) ? user.address : null,
                                 );
                               },
                             ),

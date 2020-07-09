@@ -62,10 +62,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            product.title,
-                            style: TextStyle(
-                              fontSize: 18,
+                          Expanded(
+                            child: Text(
+                              product.title,
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                           Column(

@@ -58,7 +58,6 @@ class Categories with ChangeNotifier {
           // 'creatorId': userId,
         }),
       );
-      print(response.body);
       final newCategory = Category(
         id: json.decode(response.body)['name'],
         title: category.title,
